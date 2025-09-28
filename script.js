@@ -135,8 +135,17 @@ document.addEventListener("mousemove", (e) => moveDrag(e.clientX));
 document.addEventListener("mouseup", endDrag);
 
 // Mobile
-card.addEventListener("touchstart", (e) =>
-  startDrag(e.touches[0].clientX)
-);
-card.addEventListener("touchmove", (e) => moveDrag(e.touches[0].clientX));
-card.addEventListener("touchend", endDrag);
+card.addEventListener("touchstart", (e) => {
+  e.preventDefault(); // Prevent page scrolling
+  startDrag(e.touches[0].clientX);
+});
+
+card.addEventListener("touchmove", (e) => {
+  e.preventDefault(); // Prevent page scrolling
+  moveDrag(e.touches[0].clientX);
+});
+
+card.addEventListener("touchend", (e) => {
+  e.preventDefault(); // Prevent page scrolling
+  endDrag();
+});
