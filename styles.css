@@ -13,7 +13,7 @@
 .instructions .subtitle {
   font-size: 1rem;
   color: #636e72;
-  margin: 5px 0 5px;
+  margin: 20px 0 -4px;
   font-style: italic;
 }
 
@@ -317,4 +317,14 @@ nav h2 {
 #chooseAgainBtn:hover {
   transform: scale(1.05);
   box-shadow: 0 8px 25px rgba(0, 184, 148, 0.4);
+}
+
+.dislike-text {
+  color: #fd79a8; /* pink/coral */
+  font-weight: bold;
+}
+
+.like-text {
+  color: #00b894; /* teal */
+  font-weight: bold;
 }
