@@ -50,7 +50,9 @@ function showSummary() {
 
 function reactCat(type) {
   if (currentCat >= totalCats) return;
+
   const emoji = document.getElementById("emoji");
+  const overlay = document.getElementById("overlay");
   const currentImg = catImg.src;
 
   if (type === "like") {
@@ -62,24 +64,27 @@ function reactCat(type) {
     emoji.textContent = "😿";
   }
 
+  // Show emoji and overlay
+  overlay.classList.add("show");
   emoji.classList.add("show");
 
-  emoji.addEventListener(
-    "transitionend",
-    () => {
-      currentCat++;
-      updateProgress();
+  // Hide after animation
+  setTimeout(() => {
+    emoji.classList.remove("show");
+    overlay.classList.remove("show");
+  }, 500);
 
-      if (currentCat < totalCats) {
-        loadNextCat();
-      } else {
-        showSummary();
-      }
-      emoji.classList.remove("show");
-    },
-    { once: true }
-  );
+  // Move to next cat
+  currentCat++;
+  updateProgress();
+
+  if (currentCat < totalCats) {
+    loadNextCat();
+  } else {
+    showSummary();
+  }
 }
+
 
 // --- Swipe functionality ---
 let startX,

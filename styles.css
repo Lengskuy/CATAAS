@@ -204,23 +204,44 @@ nav h2 {
   box-shadow: 0 8px 25px rgba(253, 121, 168, 0.4);
 }
 
-.emoji {
-  margin-top: 30px;
-  font-size: 2.8rem;
-  opacity: 0;
-  transform: scale(0.5) translateY(20px);
-  transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  text-align: center;
-}
-
-.emoji.show {
-  opacity: 1;
-  transform: scale(1.3) translateY(-8px);
+.card .emoji {
+  position: absolute;       /* position relative to the card */
+  top: 50%;                 /* vertical center */
+  left: 50%;                /* horizontal center */
+  transform: translate(-50%, -50%) scale(0.5); /* center and scale down */
+  font-size: 3rem;          /* size of emoji */
+  opacity: 0;               /* hidden by default */
+  pointer-events: none;     /* so it doesn't block swipes */
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  z-index: 10;              /* on top of image */
   text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+.card .emoji.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.3); /* pop effect */
+}
+
+.card .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* semi-transparent black */
+  opacity: 0;                    /* hidden by default */
+  transition: opacity 0.3s ease;
+  z-index: 5;                     /* below emoji but above image */
+  border-radius: 20px;            /* match card rounding */
+}
+
+.card .overlay.show {
+  opacity: 1;                     /* appear when emoji shows */
+}
+
+
 .summary {
-  margin-top: -60px;
+  margin-top: 10px;
   text-align: center;
   max-width: 420px;
   padding: 20px;
