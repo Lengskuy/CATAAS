@@ -6,54 +6,82 @@
 .instructions .title {
   font-size: 1.4rem;
   font-weight: bold;
-  color: #333;
+  color: #2d3436;
   margin: 0;
 }
 
 .instructions .subtitle {
   font-size: 1rem;
-  color: #666;
+  color: #636e72;
   margin: 5px 0 5px;
   font-style: italic;
 }
 
+/* Soft gradient background */
 body {
-  font-family: Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
   margin: 0;
-  background: #f0f0f0;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #ffffff 100%);
+  background-size: 200% 200%;
+  animation: subtleShift 12s ease infinite;
 }
 
+@keyframes subtleShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Clean navbar */
 nav {
   width: 100%;
-  background: #fff;
-  padding: 15px 0;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 18px 0;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
   text-align: center;
   position: sticky;
   top: 0;
+  border-bottom: 1px solid rgba(116, 185, 255, 0.1);
 }
 
 nav h2 {
   margin: 0;
-  font-size: 1.5rem;
-  color: #333;
+  font-size: 1.6rem;
+  color: #2d3436;
+  font-weight: 600;
 }
 
+/* Enhanced card with subtle blue accent */
 .card {
   margin-top: 40px;
   width: 300px;
   height: 300px;
-  border-radius: 12px;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 32px rgba(116, 185, 255, 0.15);
   background: #fff;
   text-align: center;
-  transition: transform 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   will-change: transform;
+  position: relative;
+  border: 2px solid rgba(116, 185, 255, 0.2);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(116, 185, 255, 0.03) 0%, rgba(255,255,255,0) 100%);
+  pointer-events: none;
+  z-index: 1;
 }
 
 .card img {
@@ -62,93 +90,161 @@ nav h2 {
   object-fit: cover;
 }
 
+/* Swipe indicators with soft colors */
+.swipe-like {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #fff;
+  background: linear-gradient(45deg, #74b9ff, #0984e3);
+  padding: 12px 24px;
+  border-radius: 30px;
+  opacity: 0;
+  transition: all 0.2s ease;
+  z-index: 10;
+  box-shadow: 0 6px 20px rgba(116, 185, 255, 0.4);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.swipe-dislike {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #fff;
+  background: linear-gradient(45deg, #a29bfe, #6c5ce7);
+  padding: 12px 24px;
+  border-radius: 30px;
+  opacity: 0;
+  transition: all 0.2s ease;
+  z-index: 10;
+  box-shadow: 0 6px 20px rgba(162, 155, 254, 0.4);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
 .progress-wrapper {
   margin-top: 20px;
   width: 300px;
-  height: 14px;
-  background: #ddd;
+  height: 16px;
+  background: #e9ecef;
   border-radius: 10px;
   overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Soft blue progress bar */
 .progress-bar {
   height: 100%;
   width: 0;
-  background: linear-gradient(90deg, #ff9800, #ff5722);
+  background: linear-gradient(90deg, #74b9ff 0%, #0984e3 100%);
   border-radius: 10px;
   transition: width 0.4s ease;
+  box-shadow: 0 2px 8px rgba(116, 185, 255, 0.3);
 }
 
 .progress-text {
-  margin-top: 8px;
+  margin-top: 10px;
   font-size: 0.9rem;
-  font-weight: bold;
-  color: #333;
+  font-weight: 600;
+  color: #636e72;
 }
 
 .buttons {
-  margin-top: 20px;
+  margin-top: 25px;
   display: flex;
-  gap: 20px;
+  gap: 25px;
 }
 
 .circle {
-  width: 60px;
-  height: 60px;
+  width: 65px;
+  height: 65px;
   border-radius: 50%;
   border: none;
   cursor: pointer;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  font-weight: 500;
 }
 
 .circle:hover {
-  transform: scale(1.1);
+  transform: scale(1.1) translateY(-2px);
 }
 
+/* Soft teal like button */
 .like {
-  background: #4caf50;
+  background: linear-gradient(45deg, #00b894, #00cec9);
   color: white;
+  box-shadow: 0 6px 20px rgba(0, 184, 148, 0.3);
 }
 
+.like:hover {
+  box-shadow: 0 8px 25px rgba(0, 184, 148, 0.4);
+}
+
+/* Soft coral dislike button */
 .dislike {
-  background: #f44336;
+  background: linear-gradient(45deg, #fd79a8, #e84393);
   color: white;
+  box-shadow: 0 6px 20px rgba(253, 121, 168, 0.3);
+}
+
+.dislike:hover {
+  box-shadow: 0 8px 25px rgba(253, 121, 168, 0.4);
 }
 
 .emoji {
   margin-top: 30px;
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   opacity: 0;
   transform: scale(0.5) translateY(20px);
-  transition: all 0.6s ease;
+  transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   text-align: center;
 }
 
 .emoji.show {
   opacity: 1;
-  transform: scale(1.2) translateY(0);
+  transform: scale(1.3) translateY(-8px);
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .summary {
   margin-top: -60px;
   text-align: center;
-  max-width: 400px;
+  max-width: 420px;
+  padding: 20px;
 }
 
 .summary h3 {
-  margin-bottom: 10px;
-  color: #333;
+  margin-bottom: 15px;
+  color: #2d3436;
+  font-size: 1.5rem;
+}
+
+.summary p {
+  color: #636e72;
+  margin-bottom: 20px;
+}
+
+.summary h4 {
+  color: #2d3436;
+  margin: 20px 0 15px 0;
 }
 
 .summary .liked-cats {
   display: grid;
   grid-template-columns: repeat(auto-fill, 100px);
-  gap: 10px;
+  gap: 12px;
   justify-content: center;
   margin-top: 15px;
 }
@@ -157,6 +253,12 @@ nav h2 {
   width: 100px;
   height: 100px;
   object-fit: cover;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 2px solid rgba(116, 185, 255, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.summary .liked-cats img:hover {
+  transform: scale(1.05);
 }
