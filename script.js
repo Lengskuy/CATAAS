@@ -44,9 +44,35 @@ function showSummary() {
     html += `<p>You didn't like any cats 😿</p>`;
   }
 
+  html += `<button id="chooseAgainBtn" onclick="resetGame()">Choose Again</button>`;
+
+
   summary.innerHTML = html;
   summary.style.display = "block";
 }
+
+function resetGame() {
+  // Reset all counters and arrays
+  currentCat = 0;
+  likedCats = [];
+  likedCount = 0;
+  dislikedCount = 0;
+
+  // Hide summary and show card/buttons/progress again
+  document.getElementById("summary").style.display = "none";
+  card.style.display = "block";
+  document.querySelector(".buttons").style.display = "flex";
+  document.querySelector(".progress-wrapper").style.display = "block";
+  document.getElementById("progressText").style.display = "block";
+  document.querySelector(".instructions").style.display = "block";
+
+  // Reset progress bar
+  updateProgress();
+
+  // Load the first cat again
+  loadNextCat();
+}
+
 
 function reactCat(type) {
   if (currentCat >= totalCats) return;
@@ -68,21 +94,26 @@ function reactCat(type) {
   overlay.classList.add("show");
   emoji.classList.add("show");
 
-  // Hide after animation
-  setTimeout(() => {
-    emoji.classList.remove("show");
-    overlay.classList.remove("show");
-  }, 500);
+  // Wait for the emoji animation to finish before moving to next cat
+  emoji.addEventListener(
+    "transitionend",
+    () => {
+      // Hide emoji and overlay
+      emoji.classList.remove("show");
+      overlay.classList.remove("show");
 
-  // Move to next cat
-  currentCat++;
-  updateProgress();
+      // Move to next cat
+      currentCat++;
+      updateProgress();
 
-  if (currentCat < totalCats) {
-    loadNextCat();
-  } else {
-    showSummary();
-  }
+      if (currentCat < totalCats) {
+        loadNextCat();
+      } else {
+        showSummary();
+      }
+    },
+    { once: true } // ensure listener only fires once
+  );
 }
 
 
